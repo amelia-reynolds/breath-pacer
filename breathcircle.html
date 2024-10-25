@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Pacer</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            overflow: hidden;
+            justify-content: center;
+            align-content: center;
+        }
+
+        main {
+            height: 300px;
+            width: 100vw;
+            display: flex; /* Use flexbox to center content */
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Relative positioning for child elements */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 300px;
+            padding-bottom: 5px;
+        }
+
+        .text {
+            margin-top: 350px; /* Adjust margin to position text below animation */
+            text-align: center; /* Center the text */
+            font-size: 20px; /* Center the text */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .ring {
+            border-radius: 50%; /* Make it circular */
+            position: absolute; /* Position it absolutely in the center */
+            animation: ringBreath 10.9s cubic-bezier(0.42, 0.0, 0.58, 1.0) infinite; /* Animation for the ring */
+        }
+
+        .circle {
+            background-color: #007AC0;
+            border-radius: 50%;
+            position: absolute; /* Position it absolutely in the center */
+            animation: breath 10.9s cubic-bezier(0.42, 0.0, 0.58, 1.0) infinite; /* Animation for inner circle */
+        }
+
+        @keyframes breath {
+            0% {
+                background-color: #007AC0;
+                width: 20px;
+                height: 20px;
+            }
+            37.6% { /* Max size reached after 4.1 seconds */
+                background-color: #ADD8E6;
+                width: 200px;
+                height: 200px;
+            }
+            40.3% { /* Pause at max size for 0.3 seconds */
+                background-color: #ADD8E6;
+                width: 200px;
+                height: 200px;
+            }
+            97% { /* Min size reached after 6.2 seconds */
+                background-color: #007AC0;
+                width: 20px;
+                height: 20px;
+            }
+            100% { /* Pause at min size for 0.3 seconds */
+                background-color: #007AC0;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @keyframes ringBreath {
+            0% {
+                background-color: rgba(0, 122, 192, 0.2); /* transparent blue @ min size */
+                width: 40px; /* Start size of the ring */
+                height: 40px; /* Start size of the ring */
+            }
+            37.6% { /* Max size reached after 4.1 seconds */
+                background-color: rgba(173, 216, 230, 0.2); /* transparent light blue @ max size */
+                width: 220px; /* Size of the ring when the circle is at max */
+                height: 220px; /* Size of the ring when the circle is at max */
+            }
+            40.3% { /* Pause at max size for 0.3 seconds */
+                background-color: rgba(173, 216, 230, 0.2); /* transparent lightblue during pause */
+                width: 220px; /* Keep ring at max size during pause */
+                height: 220px; /* Keep ring at max size during pause */
+                animation: ringPulse 0.3s infinite; /* Add pulsing animation during the pause */
+            }
+            97% { /* Min size reached after 6.2 seconds */
+                background-color: rgba(0, 122, 192, 0.2); /* transparent blue at min size */
+                width: 40px; /* Size of the ring when the circle is at min */
+                height: 40px; /* Size of the ring when the circle is at min */
+            }
+            100% { /* Pause at min size for 0.3 seconds */
+                background-color: rgba(0, 122, 192, 0.2); /* transparent blue at min size */
+                width: 40px; /* Keep ring at min size */
+                height: 40px; /* Keep ring at min size */
+            }
+        }
+
+        @keyframes ringPulse {
+            0%, 100% {
+                width: 220px; /* Original size */
+                height: 220px; /* Original size */
+            }
+            50% {
+                width: 260px; /* Pulsed size */
+                height: 260px; /* Pulsed size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="ring"></div> 
+        <div class="circle"></div>
+        <div class="text" style="padding-bottom: 10px;"><strong>Breathe in as the circle expands.<br />Breathe out as the circle contracts.</strong></div>
+    </main>
+    <footer><div class="text" style="padding-bottom: 10px; color: grey; font-size: 12px;"><br />© Copyright 2024 Amelia Reynolds</div></footer>
+</body>
+</html>
